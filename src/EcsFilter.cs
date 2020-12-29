@@ -32,7 +32,7 @@ namespace Leopotam.Ecs {
     [UnityEngine.Scripting.Preserve]
 #endif
     public abstract class EcsFilter {
-        protected EcsEntity[] Entities;
+        public EcsEntity[] Entities;
         protected readonly Dictionary<int, int> EntitiesMap;
         protected int EntitiesCount;
         protected int LockCount;
