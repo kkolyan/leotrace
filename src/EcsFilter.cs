@@ -321,11 +321,11 @@ namespace Leopotam.Ecs {
 #endif
     public class EcsFilter<Inc1> : EcsFilter
         where Inc1 : struct {
-        int[] _get1;
+        public int[] _get1;
 
         readonly bool _allow1;
 
-        readonly EcsComponentPool<Inc1> _pool1;
+        public readonly EcsComponentPool<Inc1> _pool1;
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
@@ -489,14 +489,14 @@ namespace Leopotam.Ecs {
     public class EcsFilter<Inc1, Inc2> : EcsFilter
         where Inc1 : struct
         where Inc2 : struct {
-        int[] _get1;
-        int[] _get2;
+        public int[] _get1;
+        public int[] _get2;
 
         readonly bool _allow1;
         readonly bool _allow2;
 
-        readonly EcsComponentPool<Inc1> _pool1;
-        readonly EcsComponentPool<Inc2> _pool2;
+        public readonly EcsComponentPool<Inc1> _pool1;
+        public readonly EcsComponentPool<Inc2> _pool2;
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
@@ -645,17 +645,17 @@ namespace Leopotam.Ecs {
         where Inc1 : struct
         where Inc2 : struct
         where Inc3 : struct {
-        int[] _get1;
-        int[] _get2;
-        int[] _get3;
+        public int[] _get1;
+        public int[] _get2;
+        public int[] _get3;
 
         readonly bool _allow1;
         readonly bool _allow2;
         readonly bool _allow3;
 
-        readonly EcsComponentPool<Inc1> _pool1;
-        readonly EcsComponentPool<Inc2> _pool2;
-        readonly EcsComponentPool<Inc3> _pool3;
+        public readonly EcsComponentPool<Inc1> _pool1;
+        public readonly EcsComponentPool<Inc2> _pool2;
+        public readonly EcsComponentPool<Inc3> _pool3;
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
@@ -829,20 +829,20 @@ namespace Leopotam.Ecs {
         where Inc2 : struct
         where Inc3 : struct
         where Inc4 : struct {
-        int[] _get1;
-        int[] _get2;
-        int[] _get3;
-        int[] _get4;
+        public int[] _get1;
+        public int[] _get2;
+        public int[] _get3;
+        public int[] _get4;
 
         readonly bool _allow1;
         readonly bool _allow2;
         readonly bool _allow3;
         readonly bool _allow4;
 
-        readonly EcsComponentPool<Inc1> _pool1;
-        readonly EcsComponentPool<Inc2> _pool2;
-        readonly EcsComponentPool<Inc3> _pool3;
-        readonly EcsComponentPool<Inc4> _pool4;
+        public readonly EcsComponentPool<Inc1> _pool1;
+        public readonly EcsComponentPool<Inc2> _pool2;
+        public readonly EcsComponentPool<Inc3> _pool3;
+        public readonly EcsComponentPool<Inc4> _pool4;
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
@@ -1041,11 +1041,11 @@ namespace Leopotam.Ecs {
         where Inc3 : struct
         where Inc4 : struct
         where Inc5 : struct {
-        int[] _get1;
-        int[] _get2;
-        int[] _get3;
-        int[] _get4;
-        int[] _get5;
+        public int[] _get1;
+        public int[] _get2;
+        public int[] _get3;
+        public int[] _get4;
+        public int[] _get5;
 
         readonly bool _allow1;
         readonly bool _allow2;
@@ -1053,11 +1053,11 @@ namespace Leopotam.Ecs {
         readonly bool _allow4;
         readonly bool _allow5;
 
-        readonly EcsComponentPool<Inc1> _pool1;
-        readonly EcsComponentPool<Inc2> _pool2;
-        readonly EcsComponentPool<Inc3> _pool3;
-        readonly EcsComponentPool<Inc4> _pool4;
-        readonly EcsComponentPool<Inc5> _pool5;
+        public readonly EcsComponentPool<Inc1> _pool1;
+        public readonly EcsComponentPool<Inc2> _pool2;
+        public readonly EcsComponentPool<Inc3> _pool3;
+        public readonly EcsComponentPool<Inc4> _pool4;
+        public readonly EcsComponentPool<Inc5> _pool5;
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
@@ -1281,12 +1281,12 @@ namespace Leopotam.Ecs {
         where Inc4 : struct
         where Inc5 : struct
         where Inc6 : struct {
-        int[] _get1;
-        int[] _get2;
-        int[] _get3;
-        int[] _get4;
-        int[] _get5;
-        int[] _get6;
+        public int[] _get1;
+        public int[] _get2;
+        public int[] _get3;
+        public int[] _get4;
+        public int[] _get5;
+        public int[] _get6;
 
         readonly bool _allow1;
         readonly bool _allow2;
@@ -1295,12 +1295,12 @@ namespace Leopotam.Ecs {
         readonly bool _allow5;
         readonly bool _allow6;
 
-        readonly EcsComponentPool<Inc1> _pool1;
-        readonly EcsComponentPool<Inc2> _pool2;
-        readonly EcsComponentPool<Inc3> _pool3;
-        readonly EcsComponentPool<Inc4> _pool4;
-        readonly EcsComponentPool<Inc5> _pool5;
-        readonly EcsComponentPool<Inc6> _pool6;
+        public readonly EcsComponentPool<Inc1> _pool1;
+        public readonly EcsComponentPool<Inc2> _pool2;
+        public readonly EcsComponentPool<Inc3> _pool3;
+        public readonly EcsComponentPool<Inc4> _pool4;
+        public readonly EcsComponentPool<Inc5> _pool5;
+        public readonly EcsComponentPool<Inc6> _pool6;
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
