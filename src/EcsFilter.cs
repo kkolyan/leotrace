@@ -32,7 +32,7 @@ namespace Leopotam.Ecs {
     [UnityEngine.Scripting.Preserve]
 #endif
     public abstract class EcsFilter {
-        protected EcsEntity[] Entities;
+        internal EcsEntity[] Entities;
         protected readonly Dictionary<int, int> EntitiesMap;
         protected int EntitiesCount;
         protected int LockCount;
@@ -64,8 +64,8 @@ namespace Leopotam.Ecs {
         }
 #endif
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public Enumerator GetEnumerator () {
-            return new Enumerator (this);
+        public EcsFilterEnumerator GetEnumerator () {
+            return new EcsFilterEnumerator (this);
         }
 
         /// <summary>
@@ -201,12 +201,12 @@ namespace Leopotam.Ecs {
         }
 #endif
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        void Lock () {
+        internal void Lock () {
             LockCount++;
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        void Unlock () {
+        internal void Unlock () {
 #if DEBUG
             if (LockCount <= 0) {
                 throw new Exception ($"Invalid lock-unlock balance for \"{GetType ().Name}\".");
@@ -273,39 +273,6 @@ namespace Leopotam.Ecs {
         /// <param name="entity">Entity.</param>
         public abstract void OnRemoveEntity (in EcsEntity entity);
 
-        public struct Enumerator : IDisposable {
-            readonly EcsFilter _filter;
-            readonly int _count;
-            int _idx;
-
-            [MethodImpl (MethodImplOptions.AggressiveInlining)]
-            internal Enumerator (EcsFilter filter) {
-                _filter = filter;
-                _count = _filter.GetEntitiesCount ();
-                _idx = -1;
-                _filter.Lock ();
-            }
-
-            public int Current {
-                [MethodImpl (MethodImplOptions.AggressiveInlining)]
-                get => _idx;
-            }
-
-#if ENABLE_IL2CPP
-            [Unity.IL2CPP.CompilerServices.Il2CppSetOption (Unity.IL2CPP.CompilerServices.Option.NullChecks, false)]
-            [Unity.IL2CPP.CompilerServices.Il2CppSetOption (Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false)]
-#endif
-            [MethodImpl (MethodImplOptions.AggressiveInlining)]
-            public void Dispose () {
-                _filter.Unlock ();
-            }
-
-            [MethodImpl (MethodImplOptions.AggressiveInlining)]
-            public bool MoveNext () {
-                return ++_idx < _count;
-            }
-        }
-
         struct DelayedOp {
             public bool IsAdd;
             public EcsEntity Entity;
@@ -321,11 +288,16 @@ namespace Leopotam.Ecs {
 #endif
     public class EcsFilter<Inc1> : EcsFilter
         where Inc1 : struct {
-        int[] _get1;
+        internal int[] _get1;
 
         readonly bool _allow1;
 
-        readonly EcsComponentPool<Inc1> _pool1;
+        internal readonly EcsComponentPool<Inc1> _pool1;
+        
+        [MethodImpl (MethodImplOptions.AggressiveInlining)]
+        public new EcsFilterEnumerator<Inc1> GetEnumerator () {
+            return new EcsFilterEnumerator<Inc1> (this);
+        }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
@@ -489,14 +461,19 @@ namespace Leopotam.Ecs {
     public class EcsFilter<Inc1, Inc2> : EcsFilter
         where Inc1 : struct
         where Inc2 : struct {
-        int[] _get1;
-        int[] _get2;
+        internal int[] _get1;
+        internal int[] _get2;
 
         readonly bool _allow1;
         readonly bool _allow2;
 
-        readonly EcsComponentPool<Inc1> _pool1;
-        readonly EcsComponentPool<Inc2> _pool2;
+        internal readonly EcsComponentPool<Inc1> _pool1;
+        internal readonly EcsComponentPool<Inc2> _pool2;
+        
+        [MethodImpl (MethodImplOptions.AggressiveInlining)]
+        public EcsFilterEnumerator<Inc1, Inc2> GetEnumerator () {
+            return new EcsFilterEnumerator<Inc1, Inc2> (this);
+        }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
@@ -645,17 +622,22 @@ namespace Leopotam.Ecs {
         where Inc1 : struct
         where Inc2 : struct
         where Inc3 : struct {
-        int[] _get1;
-        int[] _get2;
-        int[] _get3;
+        internal int[] _get1;
+        internal int[] _get2;
+        internal int[] _get3;
 
         readonly bool _allow1;
         readonly bool _allow2;
         readonly bool _allow3;
 
-        readonly EcsComponentPool<Inc1> _pool1;
-        readonly EcsComponentPool<Inc2> _pool2;
-        readonly EcsComponentPool<Inc3> _pool3;
+        internal readonly EcsComponentPool<Inc1> _pool1;
+        internal readonly EcsComponentPool<Inc2> _pool2;
+        internal readonly EcsComponentPool<Inc3> _pool3;
+        
+        [MethodImpl (MethodImplOptions.AggressiveInlining)]
+        public EcsFilterEnumerator<Inc1, Inc2, Inc3> GetEnumerator () {
+            return new EcsFilterEnumerator<Inc1, Inc2, Inc3> (this);
+        }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
