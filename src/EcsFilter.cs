@@ -201,12 +201,12 @@ namespace Leopotam.Ecs {
         }
 #endif
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        void Lock () {
+        public void Lock () {
             LockCount++;
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        void Unlock () {
+        public void Unlock () {
 #if DEBUG
             if (LockCount <= 0) {
                 throw new Exception ($"Invalid lock-unlock balance for \"{GetType ().Name}\".");
