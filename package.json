@@ -1,8 +1,8 @@
 {
-    "name": "com.leopotam.ecs",
-    "author": "Leopotam",
-    "displayName": "LeoECS Core",
-    "description": "LeoECS is simple lightweight C# Entity Component System framework based on structs. Performance, zero/small memory allocations/footprint - main goals of this project.",
+    "name": "com.nplekhanov.csx.leotrace",
+    "author": "Leopotam, forked by kkolyan",
+    "displayName": "leotrace",
+    "description": "advanced debugging fork of LeoECS",
     "unity": "2019.1",
     "version": "2020.11.22",
     "keywords": [
@@ -13,6 +13,6 @@
     "dependencies": {},
     "repository": {
         "type": "git",
-        "url": "https://github.com/Leopotam/ecs.git"
+        "url": "https://github.com/kkolyan/leotrace"
     }
 }
