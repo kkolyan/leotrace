@@ -31,7 +31,9 @@ namespace Leopotam.Ecs {
 #if UNITY_2019_1_OR_NEWER
     [UnityEngine.Scripting.Preserve]
 #endif
-    public abstract class EcsFilter {
+    public abstract class EcsFilter
+    {
+        public EcsTrace Trace;
         public EcsEntity[] Entities;
         protected readonly Dictionary<int, int> EntitiesMap;
         protected int EntitiesCount;
@@ -65,6 +67,7 @@ namespace Leopotam.Ecs {
 #endif
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public Enumerator GetEnumerator () {
+            Trace.Filter (IncludedTypes, ExcludedTypes);
             return new Enumerator (this);
         }
 
@@ -329,11 +332,13 @@ namespace Leopotam.Ecs {
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
+            Trace.Get (_pool1, _get1[idx]);
             return ref _pool1.Items[_get1[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc1> Get1Ref (in int idx) {
+            Trace.GetRef (_pool1, _get1[idx]);
             return _pool1.Ref (_get1[idx]);
         }
 
@@ -500,21 +505,25 @@ namespace Leopotam.Ecs {
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
+            Trace.Get (_pool1, _get1[idx]);
             return ref _pool1.Items[_get1[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc2 Get2 (in int idx) {
+            Trace.Get (_pool2, _get2[idx]);
             return ref _pool2.Items[_get2[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc1> Get1Ref (in int idx) {
+            Trace.GetRef (_pool1, _get1[idx]);
             return _pool1.Ref (_get1[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc2> Get2Ref (in int idx) {
+            Trace.GetRef (_pool2, _get2[idx]);
             return _pool2.Ref (_get2[idx]);
         }
 #if UNITY_2019_1_OR_NEWER
@@ -659,31 +668,37 @@ namespace Leopotam.Ecs {
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
+            Trace.Get (_pool1, _get1[idx]);
             return ref _pool1.Items[_get1[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc2 Get2 (in int idx) {
+            Trace.Get (_pool2, _get2[idx]);
             return ref _pool2.Items[_get2[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc3 Get3 (in int idx) {
+            Trace.Get (_pool3, _get3[idx]);
             return ref _pool3.Items[_get3[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc1> Get1Ref (in int idx) {
+            Trace.GetRef (_pool1, _get1[idx]);
             return _pool1.Ref (_get1[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc2> Get2Ref (in int idx) {
+            Trace.GetRef (_pool2, _get2[idx]);
             return _pool2.Ref (_get2[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc3> Get3Ref (in int idx) {
+            Trace.GetRef (_pool3, _get3[idx]);
             return _pool3.Ref (_get3[idx]);
         }
 #if UNITY_2019_1_OR_NEWER
@@ -846,41 +861,49 @@ namespace Leopotam.Ecs {
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
+            Trace.Get (_pool1, _get1[idx]);
             return ref _pool1.Items[_get1[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc2 Get2 (in int idx) {
+            Trace.Get (_pool2, _get2[idx]);
             return ref _pool2.Items[_get2[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc3 Get3 (in int idx) {
+            Trace.Get (_pool3, _get3[idx]);
             return ref _pool3.Items[_get3[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc4 Get4 (in int idx) {
+            Trace.Get (_pool4, _get4[idx]);
             return ref _pool4.Items[_get4[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc1> Get1Ref (in int idx) {
+            Trace.GetRef (_pool1, _get1[idx]);
             return _pool1.Ref (_get1[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc2> Get2Ref (in int idx) {
+            Trace.GetRef (_pool2, _get2[idx]);
             return _pool2.Ref (_get2[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc3> Get3Ref (in int idx) {
+            Trace.GetRef (_pool3, _get3[idx]);
             return _pool3.Ref (_get3[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc4> Get4Ref (in int idx) {
+            Trace.GetRef (_pool4, _get4[idx]);
             return _pool4.Ref (_get4[idx]);
         }
 #if UNITY_2019_1_OR_NEWER
@@ -1061,51 +1084,61 @@ namespace Leopotam.Ecs {
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
+            Trace.Get (_pool1, _get1[idx]);
             return ref _pool1.Items[_get1[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc2 Get2 (in int idx) {
+            Trace.Get (_pool2, _get2[idx]);
             return ref _pool2.Items[_get2[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc3 Get3 (in int idx) {
+            Trace.Get (_pool3, _get3[idx]);
             return ref _pool3.Items[_get3[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc4 Get4 (in int idx) {
+            Trace.Get (_pool4, _get4[idx]);
             return ref _pool4.Items[_get4[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc5 Get5 (in int idx) {
+            Trace.Get (_pool5, _get5[idx]);
             return ref _pool5.Items[_get5[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc1> Get1Ref (in int idx) {
+            Trace.GetRef (_pool1, _get1[idx]);
             return _pool1.Ref (_get1[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc2> Get2Ref (in int idx) {
+            Trace.GetRef (_pool2, _get2[idx]);
             return _pool2.Ref (_get2[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc3> Get3Ref (in int idx) {
+            Trace.GetRef (_pool3, _get3[idx]);
             return _pool3.Ref (_get3[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc4> Get4Ref (in int idx) {
+            Trace.GetRef (_pool4, _get4[idx]);
             return _pool4.Ref (_get4[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc5> Get5Ref (in int idx) {
+            Trace.GetRef (_pool5, _get5[idx]);
             return _pool5.Ref (_get5[idx]);
         }
 #if UNITY_2019_1_OR_NEWER
@@ -1304,61 +1337,73 @@ namespace Leopotam.Ecs {
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc1 Get1 (in int idx) {
+            Trace.Get (_pool1, _get1[idx]);
             return ref _pool1.Items[_get1[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc2 Get2 (in int idx) {
+            Trace.Get (_pool2, _get2[idx]);
             return ref _pool2.Items[_get2[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc3 Get3 (in int idx) {
+            Trace.Get (_pool3, _get3[idx]);
             return ref _pool3.Items[_get3[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc4 Get4 (in int idx) {
+            Trace.Get (_pool4, _get4[idx]);
             return ref _pool4.Items[_get4[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc5 Get5 (in int idx) {
+            Trace.Get (_pool5, _get5[idx]);
             return ref _pool5.Items[_get5[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public ref Inc6 Get6 (in int idx) {
+            Trace.Get (_pool6, _get6[idx]);
             return ref _pool6.Items[_get6[idx]];
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc1> Get1Ref (in int idx) {
+            Trace.GetRef (_pool1, _get1[idx]);
             return _pool1.Ref (_get1[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc2> Get2Ref (in int idx) {
+            Trace.GetRef (_pool2, _get2[idx]);
             return _pool2.Ref (_get2[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc3> Get3Ref (in int idx) {
+            Trace.GetRef (_pool3, _get3[idx]);
             return _pool3.Ref (_get3[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc4> Get4Ref (in int idx) {
+            Trace.GetRef (_pool4, _get4[idx]);
             return _pool4.Ref (_get4[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc5> Get5Ref (in int idx) {
+            Trace.GetRef (_pool5, _get5[idx]);
             return _pool5.Ref (_get5[idx]);
         }
 
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public EcsComponentRef<Inc6> Get6Ref (in int idx) {
+            Trace.GetRef (_pool6, _get6[idx]);
             return _pool6.Ref (_get6[idx]);
         }
 #if UNITY_2019_1_OR_NEWER

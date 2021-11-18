@@ -21,6 +21,7 @@ namespace Leopotam.Ecs {
 #endif
     // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
     public class EcsWorld {
+        public EcsTrace Trace = new EcsTrace();
         protected EcsEntityData[] Entities;
         protected int EntitiesCount;
         protected readonly EcsGrowList<int> FreeEntities;
@@ -210,6 +211,7 @@ namespace Leopotam.Ecs {
             }
             // create new filter.
             var filter = (EcsFilter) Activator.CreateInstance (filterType, BindingFlags.NonPublic | BindingFlags.Instance, null, _filterCtor, CultureInfo.InvariantCulture);
+            filter.Trace = Trace;
 #if DEBUG
             for (var filterIdx = 0; filterIdx < Filters.Count; filterIdx++) {
                 if (filter.AreComponentsSame (Filters.Items[filterIdx])) {

@@ -251,6 +251,7 @@ namespace Leopotam.Ecs {
             for (int i = 0, iMax = _allSystems.Count; i < iMax; i++) {
                 var system = _allSystems.Items[i];
                 if (system is IEcsInitSystem initSystem) {
+                    World.Trace.BeforeSystemInit(system);
                     initSystem.Init ();
 #if DEBUG
                     World.CheckForLeakedEntities ($"{initSystem.GetType ().Name}.Init()");
@@ -260,6 +261,7 @@ namespace Leopotam.Ecs {
 #if DEBUG
             _initialized = true;
 #endif
+            World.Trace.AfterSystemsInit();
         }
 
         /// <summary>
@@ -273,6 +275,7 @@ namespace Leopotam.Ecs {
             for (int i = 0, iMax = _runSystems.Count; i < iMax; i++) {
                 var runItem = _runSystems.Items[i];
                 if (runItem.Active) {
+                    World.Trace.BeforeSystemRun(runItem.System);
                     runItem.System.Run ();
                 }
 #if DEBUG
@@ -281,6 +284,7 @@ namespace Leopotam.Ecs {
                 }
 #endif
             }
+            World.Trace.AfterSystemsRun();
         }
 
         /// <summary>

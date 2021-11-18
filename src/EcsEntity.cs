@@ -72,6 +72,7 @@ namespace Leopotam.Ecs {
 #endif
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public static EcsEntity Replace<T> (in this EcsEntity entity, in T item) where T : struct {
+            entity.Owner.Trace.Update<T> ();
             Get<T> (entity) = item;
             return entity;
         }
@@ -113,6 +114,7 @@ namespace Leopotam.Ecs {
             }
 #endif
             entity.Owner.UpdateFilters (typeIdx, entity, entityData);
+            entity.Owner.Trace.Get (pool, idx);
             return ref pool.Items[idx];
         }
 
@@ -125,7 +127,9 @@ namespace Leopotam.Ecs {
         [Unity.IL2CPP.CompilerServices.Il2CppSetOption (Unity.IL2CPP.CompilerServices.Option.ArrayBoundsChecks, false)]
 #endif
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
-        public static bool Has<T> (in this EcsEntity entity) where T : struct {
+        public static bool Has<T> (in this EcsEntity entity) where T : struct
+        {
+            entity.Owner.Trace.Has<T>();
             ref var entityData = ref entity.Owner.GetEntityData (entity);
 #if DEBUG
             if (entityData.Gen != entity.Gen) { throw new Exception ("Cant check component on destroyed entity."); }
@@ -149,6 +153,7 @@ namespace Leopotam.Ecs {
 #endif
         [MethodImpl (MethodImplOptions.AggressiveInlining)]
         public static void Del<T> (in this EcsEntity entity) where T : struct {
+            entity.Owner.Trace.Delete<T> ();
             var typeIndex = EcsComponentType<T>.TypeIndex;
             ref var entityData = ref entity.Owner.GetEntityData (entity);
             // save copy to local var for protect from cleanup fields outside.
@@ -359,7 +364,10 @@ namespace Leopotam.Ecs {
             var typeIdx = EcsComponentType<T>.TypeIndex;
             for (int i = 0, iMax = entityData.ComponentsCountX2; i < iMax; i += 2) {
                 if (entityData.Components[i] == typeIdx) {
-                    return ((EcsComponentPool<T>) entity.Owner.ComponentPools[entityData.Components[i]]).Ref (entityData.Components[i + 1]);
+                    EcsComponentPool<T> pool = (EcsComponentPool<T>) entity.Owner.ComponentPools[entityData.Components[i]];
+                    int idx = entityData.Components[i + 1];
+                    entity.Owner.Trace.Get (pool, idx);
+                    return pool.Ref (idx);
                 }
             }
 #if DEBUG
@@ -390,6 +398,7 @@ namespace Leopotam.Ecs {
             // remove components first.
             for (var i = entityData.ComponentsCountX2 - 2; i >= 0; i -= 2) {
                 savedEntity.Owner.UpdateFilters (-entityData.Components[i], savedEntity, entityData);
+                entity.Owner.Trace.Delete (savedEntity.Owner.ComponentPools[entityData.Components[i]].ItemType);
                 savedEntity.Owner.ComponentPools[entityData.Components[i]].Recycle (entityData.Components[i + 1]);
                 entityData.ComponentsCountX2 -= 2;
 #if DEBUG
